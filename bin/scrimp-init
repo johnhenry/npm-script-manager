@@ -2,7 +2,10 @@
 const path = require(`path`);
 const spawn = require(`child_process`).spawn;
 const pkg = require(path.join(__dirname,`..`,`package.json`));
+let repository = pkg.repository;
+if(typeof repository !== 'string')
+repository = repository.url.replace('.git','').replace('git+','')
 const addition = spawn(
   `npm`,
-  [`run`, `scrimp`, `add-repo`, `main`, pkg.repository],
+  [`run`, `scrimp`, `add-repo`, `main`, repository],
   {stdio:`inherit`});

@@ -8,7 +8,7 @@ const pkg = require(`../package.json`);
 let repo;
 let url;
 const argv = program
-.arguments(`<name> [url]`)
+.arguments(`<repo> <url>`)
 .action(function(_repo, _url){
   repo = _repo;
   url = `${_url.replace(`github.com`, `raw.githubusercontent.com`)}/master/package.json`;

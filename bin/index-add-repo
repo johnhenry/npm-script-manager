@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+const fs = require(`fs`);
+const fetch = require(`node-fetch`);
+const path = require(`path`);
+const program = require(`commander`);
+const spawn = require(`child_process`).spawn;
+let repo;
+let url;
+const argv = program
+.arguments(`<name> [url]`)
+.action(function(_repo, _url){
+  repo = _repo;
+  url = `${url.replace(`github.com`, `githubusercontent.com`)}/master/package.json`;
+})
+.parse(process.argv);
+const repoLocation = path.join(process.cwd(), `.script`, `repository`, repo);
+
+fetch(url).then(response=>response.text()).then(content=>fs.writeFileSync(path.join(repoLocation, `package.json`), content));

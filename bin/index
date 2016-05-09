@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+const pkg = require('../package.json');
+const program = require('commander');
+program
+  .version(pkg.version)
+  .command('add <script> [action]', 'Add script')
+  .command('create <script> <template>', 'Create script from template')
+  .command('install <template>', 'Install template')
+  .command('list')
+  .command('add-repo')
+  .command('init')
+  .parse(process.argv);

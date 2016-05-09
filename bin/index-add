@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+const fs = require(`fs`);
+const path = require(`path`);
+const program = require(`commander`);
+const argv = program
+.arguments(`<name> [action...]`)
+.action(function(name, action){
+  const packageLocation = path.join(process.cwd(), `package.json`);
+  let pkg;
+  try{
+    pkg = require(packageLocation);
+  }catch(e){
+    pkg = {};
+  }
+  pkg.scripts = pkg.scripts || {};
+  pkg.scripts[name] = action.join(` `);
+  fs.writeFileSync(packageLocation, JSON.stringify(pkg, null,` `))
+})
+.parse(process.argv);

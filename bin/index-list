@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+const fs = require(`fs`);
+const path = require(`path`);
+const program = require(`commander`);
+const spawn = require(`child_process`).spawn;
+let repo;
+const displayRepo = (repo)=>{
+  const repoLocation = path.join(process.cwd(), '.script', 'repository', repo);
+  const packageLocation = path.join(repoLocation, 'package.json');
+  const asm = require(packageLocation).asm;
+  const installable = Object.keys(asm);
+  const templateLocation = path.join(repoLocation, 'templates');
+  const installed = fs.readdirSync(templateLocation).filter(function(file) {
+    return fs.statSync(path.join(templateLocation, file)).isDirectory();
+  });
+  console.log(repo);
+  installable.forEach(template=>{
+    console.log(`${installed.indexOf(template)!== -1 ? `*`: ``} ${template}`);
+  });
+}
+
+const argv = program
+.arguments(`<repo>`)
+.action(function(_repo){
+  repo = _repo;
+});
+if(repo){
+  displayRepo(repo);
+}else{
+  fs.readdirSync(path.join(process.cwd(), '.script', 'repository')).filter(function(file) {
+    return fs.statSync(path.join(templateLocation, file)).isDirectory();
+  }).forEach(displayRepo);
+}

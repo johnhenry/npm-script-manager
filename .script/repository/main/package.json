@@ -1,0 +1,15 @@
+{
+  "nsm": {
+    "js-edge": "https://github.com/johnhenry/nsm-js-edge",
+    "css-edge": "https://github.com/johnhenry/nsm-css-edge"
+  },
+  "repository": "https://github.com/johnhenry/nsm",
+  "name": "main",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

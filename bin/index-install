@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+const fs = require(`fs`);
+const path = require(`path`);
+const fetch = require(`node-fetch`);
+const program = require(`commander`);
+const spawn = require(`child_process`).spawn;
+let template;
+let repo;
+const argv = program
+.arguments(`<template>`)
+.action(function(_template){
+  template = _template.split('/');
+  if(template.length === 1){
+    repo = 'main';
+    template = template[0];
+  }else{
+    repo = template[0];
+    template = template[1];
+  }
+
+})
+.parse(process.argv);
+const location = path.join(process.cwd(), `.script`, `repository`, repo);
+const packageLocation = path.join(location, `package.json`);
+const pkg = JSON.parse(fs.readFileSync(packageLocation, 'utf8'));
+const templates = pkg.nsm;
+const base = templates[template].replace(`github.com`, `githubusercontent.com`);
+const urls = [`package.json`, `index.json`].map(url=>`${base}/master/${url}`);
+console.log(urls.join(` `));
+Promise.all([packageURL, indexURL].map(url=>fetch(url)))
+.then(res=>Promise.all(res.map(r=>r.text())))
+.then(([p, i])=>{
+  fs.writeFileSync(path.join(location, `templates`, template, `package.json`), p);
+  fs.writeFileSync(path.join(location, `templates`, template, `index.js`), i);
+  console.log(`${repo}/${template} installed.`);
+});

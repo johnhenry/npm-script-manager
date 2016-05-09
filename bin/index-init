@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+const path = require(`path`);
+const spawn = require(`child_process`).spawn;
+const pak = require(path.join(__dirname,'..','package.json'));
+const addition = spawn(
+  `npm`,
+  [`run`, `script`, `add-repo`, `main`, pak.repository],
+  {stdio:'inherit'});

@@ -6,11 +6,11 @@ const spawn = require(`child_process`).spawn;
 const pkg = require(`../package.json`);
 let repo;
 const displayRepo = (repo)=>{
-  const repoLocation = path.join(process.cwd(), `.${pkg.name}`, 'repository', repo);
-  const packageLocation = path.join(repoLocation, 'package.json');
-  const nsm = require(packageLocation).nsm;
-  const installable = Object.keys(nsm);
-  const templateLocation = path.join(repoLocation, 'templates');
+  const repoLocation = path.join(process.cwd(), `.${pkg.name}`, `repository`, repo);
+  const packageLocation = path.join(repoLocation, `package.json`);
+  const scrimp = require(packageLocation).scrimp;
+  const installable = Object.keys(scrimp);
+  const templateLocation = path.join(repoLocation, `templates`);
   try{
     fs.mkdirSync(templateLocation);
   }catch(e){
@@ -33,7 +33,7 @@ const argv = program
 if(repo){
   displayRepo(repo);
 }else{
-  const templatesDir = path.join(process.cwd(), `.${pkg.name}`, 'repository');
+  const templatesDir = path.join(process.cwd(), `.${pkg.name}`, `repository`);
   fs.readdirSync(templatesDir).filter(function(dir) {
     return fs.statSync(path.join(templatesDir, dir)).isDirectory();
   }).forEach(displayRepo);

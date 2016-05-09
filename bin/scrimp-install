@@ -10,9 +10,9 @@ let repo;
 const argv = program
 .arguments(`<template>`)
 .action(function(_template){
-  template = _template.split('/');
+  template = _template.split(`/`);
   if(template.length === 1){
-    repo = 'main';
+    repo = `main`;
     template = template[0];
   }else{
     repo = template[0];
@@ -23,14 +23,14 @@ const argv = program
 .parse(process.argv);
 const location = path.join(process.cwd(), `.${pkga.name}`, `repository`, repo);
 const packageLocation = path.join(location, `package.json`);
-const pkg = JSON.parse(fs.readFileSync(packageLocation, 'utf8'));
-const templates = pkg.nsm;
+const pkg = JSON.parse(fs.readFileSync(packageLocation, `utf8`));
+const templates = pkg.scrimp;
 const base = templates[template].replace(`github.com`, `raw.githubusercontent.com`);
 const urls = [`package.json`, `index.js`].map(url=>`${base}/master/${url}`);
 Promise.all(urls.map(url=>fetch(url)))
 .then(res=>Promise.all(res.map(r=>r.text())))
 .then(([p, i])=>{
-  require('fs-path').writeFileSync(path.join(location, `templates`, template, `package.json`), p);
-  require('fs-path').writeFileSync(path.join(location, `templates`, template, `index.js`), i);
+  require(`fs-path`).writeFileSync(path.join(location, `templates`, template, `package.json`), p);
+  require(`fs-path`).writeFileSync(path.join(location, `templates`, template, `index.js`), i);
   console.log(`${repo}/${template} installed.`);
 }).catch(console.error.bind(console));

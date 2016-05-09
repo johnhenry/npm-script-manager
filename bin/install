@@ -3,20 +3,23 @@ const pkg = require(`../package.json`);
 const spawn = require(`child_process`).spawn;
 const fs = require(`fs`);
 const path = require(`path`);
-const installation = spawn(
- `npm`,
- [`install`, `--save`, `${pkg.name}@${pkg.version}`],
- {stdio:`inherit`});
 
+const installation =()=>require(`child_process`).spawnSync(
+`npm`,
+[`install`, `--save-dev`, `${pkg.name}@${pkg.version}`],
+{stdio:`inherit`});
 
- const packageLocation = path.join(process.cwd(), `package.json`);
- let pkg2;
- try{
-   pkg2 = require(packageLocation);
- }catch(e){
-   pkg2 = {};
- }
- pkg2.scripts = pkg2.scripts || {};
- pkg2.scripts[pkg.name] = `node ./node_modules/scripm/bin/${pkg.name}`;
-
- fs.writeFileSync(packageLocation, JSON.stringify(pkg2));
+const packageLocation = path.join(process.cwd(), `package.json`);
+let pkg2;
+try{
+ require(packageLocation);
+}catch(e){
+ require(`child_process`).spawnSync(`npm`,[`init`, `--force`,`-s`],{stdio:`inherit`});
+}
+setTimeout(()=>{
+  pkg2 = require(packageLocation);
+  pkg2.scripts = pkg2.scripts || {};
+  pkg2.scripts[pkg.name] = `node ./node_modules/${pkg.name}/bin/${pkg.name}`;
+  fs.writeFileSync(packageLocation, JSON.stringify(pkg2));
+  require(`child_process`).spawnSync(`npm`,[`run`, `${pkg.name}`,`init`,`-s`],{stdio:`inherit`})
+});

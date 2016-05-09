@@ -15,4 +15,4 @@ const argv = program
 })
 .parse(process.argv);
 const repoLocation = path.join(process.cwd(), `.${pkg.name}`, `repository`, repo);
-fetch(url).then(response=>response.text()).then(content=>require('fs-path').writeFileSync(path.join(repoLocation, `package.json`), content)).catch(console.error.bind(console));
+fetch(url).then(response=>response.text()).then(content=>require(`fs-path`).writeFileSync(path.join(repoLocation, `package.json`), content)).catch(console.error.bind(console));

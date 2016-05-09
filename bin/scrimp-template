@@ -9,12 +9,12 @@ let name;
 let template;
 let repo;
 const argv = program
-.arguments(`<name> [template]`)
+.arguments(`<name> <template>`)
 .action(function(_name, _template){
   name = _name;
-  template = _template.split('/');
+  template = _template.split(`/`);
   if(template.length === 1){
-    repo = 'main';
+    repo = `main`;
     template = template[0];
   }else{
     repo = template[0];
@@ -33,7 +33,7 @@ try{
 const dependencies = pkg.devDependencies || {};
 const installs = [];
 for(let dep in dependencies){
-  if(typeof dependencies.hasOwnProperty === 'function' && !dependencies.hasOwnProperty(dep)){
+  if(typeof dependencies.hasOwnProperty === `function` && !dependencies.hasOwnProperty(dep)){
     continue;
   }
   installs.push(`${dep}@${dependencies[dep]}`.replace(`^`,``))
@@ -42,19 +42,19 @@ for(let dep in dependencies){
 const installation = spawn(
   `npm`,
     [`install`, `--save-dev`].concat(installs),
-    {stdio:'inherit'});
-installation.on('error', (error)=>{
+    {stdio:`inherit`});
+installation.on(`error`, (error)=>{
   process.stderr.write(String(error));
 });
 
-installation.on('exit',()=>{
-  const scriptLocation = path.join(templateLocation, pkg.main || 'index.js');
+installation.on(`exit`,()=>{
+  const scriptLocation = path.join(templateLocation, pkg.main || `index.js`);
   Promise.resolve(require(scriptLocation)(argv)).then(command=>{
     //Add script to package
     const addition = spawn(
       `npm`,
-      [`run`, `nsm`, `add`, name, command],
-      {stdio:'inherit'});
+      [`run`, `scrimp`, `add-script`, name, command],
+      {stdio:`inherit`});
   }).catch(error=>{
     process.stderr.write(String(error));
   });

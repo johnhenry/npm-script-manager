@@ -1,12 +1,15 @@
 #!/usr/bin/env node
-const pkg = require('../package.json');
-const program = require('commander');
+const pkg = require(`../package.json`);
+const program = require(`commander`);
 program
   .version(pkg.version)
-  .command('add <name> [action]', 'Add script')
-  .command('template <name> <template>', 'Create script from template')
-  .command('install <template>', 'Install template')
-  .command('list <repo>', 'list installed templates')
-  .command('add-repo <repo> <url>', 'add repo')
-  .command('init', "initialize")
+  .usage(`<command> [options]`)
+  .command(`init`, `initialize`)
+  .command(`add-repo <repo> <url>`, `Add repository`)
+  .command(`template <name> <template>`, `Create script from template`)
+  .command(`install <template>`, `Install template`)
+  .command(`list <repo>`, `List installed templates`)
+  .command(`add-script <name> [action]`, `Add script`)
+  .command(`combine-scripts <name> [scripts...]`, `Combine script`)
+  .command(`remove-script <name>`, `Remove script`)
   .parse(process.argv);

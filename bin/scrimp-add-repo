@@ -4,6 +4,7 @@ const fetch = require(`node-fetch`);
 const path = require(`path`);
 const program = require(`commander`);
 const spawn = require(`child_process`).spawn;
+const pkg = require(`../package.json`);
 let repo;
 let url;
 const argv = program
@@ -13,5 +14,5 @@ const argv = program
   url = `${_url.replace(`github.com`, `raw.githubusercontent.com`)}/master/package.json`;
 })
 .parse(process.argv);
-const repoLocation = path.join(process.cwd(), `.script`, `repository`, repo);
+const repoLocation = path.join(process.cwd(), `.${pkg.name}`, `repository`, repo);
 fetch(url).then(response=>response.text()).then(content=>require('fs-path').writeFileSync(path.join(repoLocation, `package.json`), content)).catch(console.error.bind(console));

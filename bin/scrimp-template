@@ -3,6 +3,8 @@ const fs = require(`fs`);
 const path = require(`path`);
 const program = require(`commander`);
 const spawn = require(`child_process`).spawn;
+const pkg = require(`../package.json`);
+
 let name;
 let template;
 let repo;
@@ -20,7 +22,7 @@ const argv = program
   }
 })
 .parse(process.argv);
-const templateLocation = path.join(process.cwd(), `.script`, `repository`, repo, `templates`, template);
+const templateLocation = path.join(process.cwd(), `.${pkga.name}`, `repository`, repo, `templates`, template);
 const packageLocation = path.join(templateLocation, `package.json`);
 let pkg;
 try{
@@ -43,7 +45,8 @@ const installation = spawn(
     {stdio:'inherit'});
 installation.on('error', (error)=>{
   process.stderr.write(String(error));
-})
+});
+
 installation.on('exit',()=>{
   const scriptLocation = path.join(templateLocation, pkg.main || 'index.js');
   Promise.resolve(require(scriptLocation)(argv)).then(command=>{

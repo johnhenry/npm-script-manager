@@ -20,14 +20,3 @@ const installation = spawn(
  pkg2.scripts[pkg.name] = `node ./node_modules/scripm/bin/${pkg.name}`;
 
  fs.writeFileSync(packageLocation, JSON.stringify(pkg2));
-
-const program = require(`commander`);
-program
-  .version(pkg.version)
-  .command(`add <name> [action]`, `Add script`)
-  .command(`template <name> <template>`, `Create script from template`)
-  .command(`install <template>`, `Install template`)
-  .command(`list <repo>`, `list installed templates`)
-  .command(`add-repo <repo> <url>`, `add repo`)
-  .command(`init`, "initialize")
-  .parse(process.argv);

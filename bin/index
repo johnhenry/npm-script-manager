@@ -6,7 +6,7 @@ program
   .command('add <script> [action]', 'Add script')
   .command('create <script> <template>', 'Create script from template')
   .command('install <template>', 'Install template')
-  .command('list')
-  .command('add-repo')
-  .command('init')
+  .command('list <repo>', 'list installed templates')
+  .command('add-repo <repo> <url>', 'add repo')
+  .command('init', "initialize")
   .parse(process.argv);

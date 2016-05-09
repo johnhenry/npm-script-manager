@@ -24,7 +24,7 @@ const location = path.join(process.cwd(), `.script`, `repository`, repo);
 const packageLocation = path.join(location, `package.json`);
 const pkg = JSON.parse(fs.readFileSync(packageLocation, 'utf8'));
 const templates = pkg.nsm;
-const base = templates[template].replace(`github.com`, `githubusercontent.com`);
+const base = templates[template].replace(`github.com`, `raw.githubusercontent.com`);
 const urls = [`package.json`, `index.json`].map(url=>`${base}/master/${url}`);
 console.log(urls.join(` `));
 Promise.all([packageURL, indexURL].map(url=>fetch(url)))

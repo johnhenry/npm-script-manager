@@ -50,7 +50,7 @@ installation.on('exit',()=>{
     //Add script to package
     const addition = spawn(
       `npm`,
-      [`run`, `script`, `add`, name, command],
+      [`run`, `nsm`, `add`, name, command],
       {stdio:'inherit'});
   }).catch(error=>{
     process.stderr.write(String(error));

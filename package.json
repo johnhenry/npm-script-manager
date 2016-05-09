@@ -1,24 +1,23 @@
 {
-  "name": "scrimp",
-  "version": "0.0.2",
-  "description": "",
-  "main": "./bin/scrimp",
-  "bin": {
-    "initialize-scrimp": "./bin/install"
-  },
-  "repository": "https://github.com/johnhenry/scrimp",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "John Henry",
-  "license": "ISC",
-  "dependencies": {
-    "commander": "^2.9.0",
-    "fs-path": "0.0.22",
-    "hat": "0.0.3"
-  },
-  "scrimp": {
-    "js-edge": "https://github.com/johnhenry/scrimp-js-edge",
-    "css-edge": "https://github.com/johnhenry/scrimp-css-edge"
-  }
+ "name": "scrimp",
+ "version": "0.0.2",
+ "description": "",
+ "main": "./bin/scrimp",
+ "bin": {
+  "initialize-scrimp": "./bin/install"
+ },
+ "repository": "https://github.com/johnhenry/scrimp",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "author": "John Henry",
+ "license": "ISC",
+ "dependencies": {
+  "commander": "^2.9.0",
+  "fs-path": "0.0.22"
+ },
+ "scrimp": {
+  "js-edge": "https://github.com/johnhenry/scrimp-js-edge",
+  "css-edge": "https://github.com/johnhenry/scrimp-css-edge"
+ }
 }

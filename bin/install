@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-const pkg = require(`../package.json`);
+
 const spawn = require(`child_process`).spawn;
 const fs = require(`fs`);
 const path = require(`path`);
+const pkg = require(path.join(__dirname, `../package.json`));
+
 
 require(`child_process`).spawnSync(
 `npm`,

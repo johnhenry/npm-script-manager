@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.9.0",
-    "fs-path": "0.0.22"
+    "fs-path": "0.0.22",
+    "node-fetch": "^1.5.2"
   },
   "scrimp": {
     "js-edge": "https://github.com/johnhenry/scrimp-js-edge",

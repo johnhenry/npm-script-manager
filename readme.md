@@ -14,13 +14,13 @@ Install scrimp globally.
 npm install --g scrimp
 ```
 
-After installing scrimp globally, the 'initialize-scrimp' command will be available. Simply run it in your project's directory, and it will install scripm locally as well as add the local script to package.json.
+After installing scrimp globally, the 'initialize-scrimp' command will be available. Simply run it in your project's directory, and it will install scrimp locally as well as add the local script to package.json.
 
 ```bash
 initialize-scrimp
 ```
 
-This will automatically install scrimp locally and add the appropriate scrip to the project's package.json file.
+This will automatically install scrimp locally and add the appropriate script to the project's package.json file.
 
 ###Direct
 
@@ -36,7 +36,7 @@ Add a script referencing scrimp locally to the "scripts" section of you're proje
 
 ...
   "scripts":{
-      "scripm":"./node_modules/scripm/bin/scripm"
+      "scrimp":"./node_modules/scrimp/bin/scrimp"
   }
 ...
 
@@ -174,7 +174,7 @@ npm run scrimp remove-script build
 ##Extending
 
 ###Repository
-Creating a repository is easy. Simply create a github repository with a package.json file in it. Ensure that the file has a "scimp" property who's value is a dictionary. This dictionary maps template names to the github urls.
+Creating a repository is easy. Simply create a github repository with a package.json file in it. Ensure that the file has a "scrimp" property who's value is a dictionary. This dictionary maps template names to the github urls.
 
 ```json
 {

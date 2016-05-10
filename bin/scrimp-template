@@ -3,7 +3,7 @@ const fs = require(`fs`);
 const path = require(`path`);
 const program = require(`commander`);
 const spawn = require(`child_process`).spawn;
-const pkg = require(`../package.json`);
+const pkga = require(`../package.json`);
 
 let name;
 let template;

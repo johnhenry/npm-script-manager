@@ -145,19 +145,6 @@ npm run scrimp add-script <new script name> <new script content>
 npm run scrimp add-script css 'cat ./style/index.css ./style/responsive.css > ./dist/style.css'
 ```
 
-###combine-scripts
-Combine previously created scripts.
-
-```bash
-npm run scrimp combine-scripts <new script name> [script names...]
-```
-
-####Example
-
-```bash
-npm run scrimp combine-scripts build js css
-```
-
 ###remove-script
 Remove a previously created script.
 
